@@ -1,0 +1,200 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<title>MBAPropiedades</title>
+<meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="description" content="Wish shop project">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="stylesheet" type="text/css" href="styles/bootstrap4/bootstrap.min.css">
+<link href="plugins/font-awesome-4.7.0/css/font-awesome.min.css" rel="stylesheet" type="text/css">
+<link rel="stylesheet" type="text/css" href="plugins/OwlCarousel2-2.2.1/owl.carousel.css">
+<link rel="stylesheet" type="text/css" href="plugins/OwlCarousel2-2.2.1/owl.theme.default.css">
+<link rel="stylesheet" type="text/css" href="plugins/OwlCarousel2-2.2.1/animate.css">
+<link href="plugins/colorbox/colorbox.css" rel="stylesheet" type="text/css">
+<link rel="stylesheet" type="text/css" href="styles/main_styles.css">
+<link rel="stylesheet" type="text/css" href="styles/responsive.css">
+
+
+<script src="https://www.gstatic.com/firebasejs/7.23.0/firebase-app.js"></script>
+
+<!-- If you enabled Analytics in your project, add the Firebase SDK for Analytics -->
+<script src="https://www.gstatic.com/firebasejs/7.23.0/firebase-analytics.js"></script>
+
+<!-- Add Firebase products that you want to use -->
+<script src="https://www.gstatic.com/firebasejs/7.23.0/firebase-auth.js"></script>
+<script src="https://www.gstatic.com/firebasejs/7.23.0/firebase-firestore.js"></script>
+<script src="js/jquery-3.2.1.min.js"></script>
+<script> 
+	var firebaseConfig = {
+		apiKey: "AIzaSyCQYJBgUDIGeHY4kKj6o_VrqKTLkTmnGu4",
+		authDomain: "apartamentosberon.firebaseapp.com",
+		projectId: "apartamentosberon",
+		storageBucket: "apartamentosberon.appspot.com",
+		messagingSenderId: "1010613505185",
+		appId: "1:1010613505185:web:f508d05fa109aa047a74e0"
+
+	}
+	
+	
+	var deptos ;
+	window.onload = function(){ 
+		firebase.initializeApp(firebaseConfig);
+		defaultFirestore = firebase.firestore();
+		defaultFirestore.collection("deptos").where("type", "==", "alquila").get().then((querySnapshot) => {
+			$( document ).ready(function() {
+				querySnapshot.forEach((doc) => {
+				console.log(doc.id)
+				$('#products').append(
+				'<div class="col-lg-4 product_col">'+
+							'<div class="product">'+
+								'<div class="product_image">'+
+									'<a href="product.html#'+ doc.id + '">'+
+									'<img src="'+ doc.data().img[0] +'"' + 'alt="">'+
+									'</a>'+
+								'</div>'+
+								
+								'<div class="product_content clearfix">'+
+									'<div class="product_info">'+
+										'<div class="product_name"><a href="product.html">'+ doc.data().nombre +
+										'</a></div>'+
+										'<div class="product_price">'+ doc.data().precio +'</div>'+
+									'</div>'+
+									
+								'</div>'+
+							'</div>'+
+						'</div>');
+				//console.log(`${doc.id} => ${doc.data()}`);
+			});
+		 });
+		});
+	 }
+	
+	
+		
+
+	
+
+
+</script>
+</head>
+ 
+  
+<body>
+
+	
+
+<div class="super_container">
+	
+	<!-- Header -->
+
+	<header class="header">
+		<div class="header_inner d-flex flex-row align-items-center justify-content-start">
+			<div class="logo"><img src ="images/logo.jpg" style="width: 150px; height: 150px; "></div>
+			<nav class="main_nav">
+				<ul>
+					<li><a href="index.html">Todos</a></li>
+					<li><a href="venta.html">Venta </a></li>
+					<li><a href="alquila.html">Alquiler</a></li>
+					<!--li><a href="contact.html">contact</a></li-->
+				</ul>
+			</nav>
+			
+		</div>
+	</header>
+
+
+		
+
+	<div class="arrivals">
+		<div class="container">
+			<div class="row">
+				<div class="col">
+					<div class="section_title_container text-center">
+					</div>
+				</div>
+			</div>
+			<div class="row products_container" id="products">
+
+			
+
+
+			</div>
+
+
+		</div>
+	</div>
+
+	<!-- Extra
+
+	<div class="extra clearfix">
+		<div class="extra_promo extra_promo_1">
+			<div class="extra_promo_image" style="background-image:url(images/extra_1.jpg)"></div>
+			<div class="extra_1_content d-flex flex-column align-items-center justify-content-center text-center">
+				<div class="extra_1_price">30%<span>off</span></div>
+				<div class="extra_1_title">On all shoes</div>
+				<div class="extra_1_text">*Integer ut imperdiet erat. Quisque ultricies lectus tellus, eu tristique magna pharetra.</div>
+				<div class="button extra_1_button"><a href="checkout.html">check out</a></div>
+			</div>
+		</div>
+		<div class="extra_promo extra_promo_2">
+			<div class="extra_promo_image" style="background-image:url(images/extra_2.jpg)"></div>
+			<div class="extra_2_content d-flex flex-column align-items-center justify-content-center text-center">
+				<div class="extra_2_title">
+					<div class="extra_2_center">&</div>
+					<div class="extra_2_top">Mix</div>
+					<div class="extra_2_bottom">Match</div>
+				</div>
+				<div class="extra_2_text">*Integer ut imperdiet erat. Quisque ultricies lectus tellus, eu tristique magna pharetra.</div>
+				<div class="button extra_2_button"><a href="checkout.html">check out</a></div>
+			</div>
+		</div>
+	</div> -->
+
+
+
+	
+
+	<!-- Newsletter 
+
+	<div class="newsletter">
+		<div class="newsletter_content">
+			<div class="newsletter_image" style="background-image:url(images/newsletter.jpg)"></div>
+			<div class="container">
+				<div class="row">
+					<div class="col">
+						<div class="section_title_container text-center">
+							<div class="section_subtitle">only the best</div>
+							<div class="section_title">subscribe for a 20% discount</div>
+						</div>
+					</div>
+				</div>
+				<div class="row newsletter_container">
+					<div class="col-lg-10 offset-lg-1">
+						<div class="newsletter_form_container">
+							<form action="#">
+								<input type="email" class="newsletter_input" required="required" placeholder="E-mail here">
+								<button type="submit" class="newsletter_button">subscribe</button>
+							</form>
+						</div>
+						<div class="newsletter_text">Integer ut imperdiet erat. Quisque ultricies lectus tellus, eu tristique magna pharetra nec. Fusce vel lorem libero. Integer ex mi, facilisis sed nisi ut, vestib ulum ultrices nulla. Aliquam egestas tempor leo.</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>-->
+
+
+
+</div>
+
+<script src="js/jquery-3.2.1.min.js"></script>
+<script src="styles/bootstrap4/popper.js"></script>
+<script src="styles/bootstrap4/bootstrap.min.js"></script>
+<script src="plugins/OwlCarousel2-2.2.1/owl.carousel.js"></script>
+<script src="plugins/easing/easing.js"></script>
+<script src="plugins/parallax-js-master/parallax.min.js"></script>
+<script src="plugins/colorbox/jquery.colorbox-min.js"></script>
+<script src="js/custom.js"></script>
+</body>
+</html>

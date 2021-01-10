@@ -1,0 +1,211 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<title>Product</title>
+<meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="description" content="Wish shop project">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="stylesheet" type="text/css" href="styles/bootstrap4/bootstrap.min.css">
+<link href="plugins/font-awesome-4.7.0/css/font-awesome.min.css" rel="stylesheet" type="text/css">
+<link rel="stylesheet" type="text/css" href="styles/product.css">
+<link rel="stylesheet" type="text/css" href="styles/product_responsive.css">
+
+<script src="https://www.gstatic.com/firebasejs/7.23.0/firebase-app.js"></script>
+
+<!-- If you enabled Analytics in your project, add the Firebase SDK for Analytics -->
+<script src="https://www.gstatic.com/firebasejs/7.23.0/firebase-analytics.js"></script>
+
+<!-- Add Firebase products that you want to use -->
+<script src="https://www.gstatic.com/firebasejs/7.23.0/firebase-auth.js"></script>
+<script src="https://www.gstatic.com/firebasejs/7.23.0/firebase-firestore.js"></script>
+<script src="js/jquery-3.2.1.min.js"></script>
+<script>
+
+	var firebaseConfig = {
+		apiKey: "AIzaSyCQYJBgUDIGeHY4kKj6o_VrqKTLkTmnGu4",
+		authDomain: "apartamentosberon.firebaseapp.com",
+		projectId: "apartamentosberon",
+		storageBucket: "apartamentosberon.appspot.com",
+		messagingSenderId: "1010613505185",
+		appId: "1:1010613505185:web:f508d05fa109aa047a74e0"
+
+	}
+	
+	
+	firebase.initializeApp(firebaseConfig);
+	var text = window.location.hash.substring(1)
+	console.log(text)
+	defaultFirestore = firebase.firestore();
+	defaultFirestore.collection("deptos").doc(text).get().then(function(doc) {
+		if (doc.exists) {
+			console.log("Document data:", doc.data());
+			var i = 0;
+			doc.data().img.forEach(img =>{
+				console.log(img)
+				$('#'+i).attr("data-image",doc.data().img[i]);		
+				$('#'+i).attr("style","background-image:url("+ doc.data().img[i] + ")");
+				console.log('#'+i)	
+				i++		
+			})
+
+			$('#mainimg').attr("src",doc.data().img[0]);
+			
+
+			$( document ).ready(function() {
+				
+				$('#productorow').append(
+					'<div class="col-lg-5">'+
+						'<div class="product_content">'+
+							'<div class="product_name">'+ doc.data().nombre + 
+								'</div>'+
+							'<div class="product_text">'+
+								'<p>'+
+									doc.data().descripcion +
+							'</p>'+
+							'</div>'+
+						'</div>'+
+					'</div>'
+				);
+	
+
+			})
+		} else {
+			console.log("No such document!");
+		}
+	}).catch(function(error) {
+		console.log("Error getting document:", error);
+	});
+	
+	
+	
+</script>
+</head>
+<body>
+
+<div class="super_container">
+	
+	<!-- Header -->
+
+	
+	<header class="header">
+		<div class="header_inner d-flex flex-row align-items-center justify-content-start">
+			<div class="logo"><img src ="images/logo.jpg" style="width: 150px; height: 150px; "></div>
+			<nav class="main_nav">
+				<ul>
+					<li><a href="index.html">Todos</a></li>
+					<li><a href="venta.html">Venta </a></li>
+					<li><a href="alquila.html">Alquiler</a></li>
+					<!--li><a href="contact.html">contact</a></li-->
+				</ul>
+			</nav>
+			
+		</div>
+	</header>
+	
+	<!-- Product -->
+
+	<div class="product" >
+		<div class="container">
+			<div class="row product_row" id="productorow">
+
+				<!-- Product Image -->
+				<div class="col-lg-7">
+					<div class="product_image">
+						<div class="product_image_large">
+							<img src="images/flat1/flat11.jpg" alt="" id="mainimg">
+						</div>
+						<div class="product_image_thumbnails d-flex flex-row align-items-start justify-content-start" id="listimg">
+							<div class="product_image_thumbnail" style="" data-image="" id="0"></div>
+							<div class="product_image_thumbnail" style="" data-image="" id="1"></div>
+							<div class="product_image_thumbnail" style="" data-image="" id="2"></div>
+							<div class="product_image_thumbnail" style="" data-image="" id="3"></div>
+							<div class="product_image_thumbnail" style="" data-image="" id="4"></div>
+						</div>
+						<div class="product_image_thumbnails d-flex flex-row align-items-start justify-content-start" id="listimg">
+							<div class="product_image_thumbnail" style="" data-image="" id="5"></div>
+							<div class="product_image_thumbnail" style="" data-image="" id="6"></div>
+							<div class="product_image_thumbnail" style="" data-image="" id="7"></div>
+							<div class="product_image_thumbnail" style="" data-image="" id="8"></div>
+							<div class="product_image_thumbnail" style="" data-image="" id="9"></div>
+						</div>
+						<div class="product_image_thumbnails d-flex flex-row align-items-start justify-content-start" id="listimg">
+							<div class="product_image_thumbnail" style="" data-image="" id="10"></div>
+							<div class="product_image_thumbnail" style="" data-image="" id="11"></div>
+							<div class="product_image_thumbnail" style="" data-image="" id="12"></div>
+							<div class="product_image_thumbnail" style="" data-image="" id="13"></div>
+							<div class="product_image_thumbnail" style="" data-image="" id="14"></div>
+						</div>
+						<div class="product_image_thumbnails d-flex flex-row align-items-start justify-content-start" id="listimg">
+							<div class="product_image_thumbnail" style="" data-image="" id="15"></div>
+							<div class="product_image_thumbnail" style="" data-image="" id="16"></div>
+							<div class="product_image_thumbnail" style="" data-image="" id="17"></div>
+							<div class="product_image_thumbnail" style="" data-image="" id="18"></div>
+							<div class="product_image_thumbnail" style="" data-image="" id="19"></div>
+						</div>
+						<div class="product_image_thumbnails d-flex flex-row align-items-start justify-content-start" id="listimg">
+							<div class="product_image_thumbnail" style="" data-image="" id="20"></div>
+							<div class="product_image_thumbnail" style="" data-image="" id="21"></div>
+							<div class="product_image_thumbnail" style="" data-image="" id="22"></div>
+							<div class="product_image_thumbnail" style="" data-image="" id="23"></div>
+							<div class="product_image_thumbnail" style="" data-image="" id="24"></div>
+						</div>
+						<div class="product_image_thumbnails d-flex flex-row align-items-start justify-content-start" id="listimg">
+							<div class="product_image_thumbnail" style="" data-image="" id="25"></div>
+							<div class="product_image_thumbnail" style="" data-image="" id="26"></div>
+							<div class="product_image_thumbnail" style="" data-image="" id="27"></div>
+							<div class="product_image_thumbnail" style="" data-image="" id="28"></div>
+							<div class="product_image_thumbnail" style="" data-image="" id="29"></div>
+						</div>
+						
+					</div>
+				</div> 
+
+			
+				
+			</div>
+
+		
+
+	
+
+	<!-- Footer 
+
+	<footer class="footer">
+		<div class="container">
+			<div class="row">
+				<div class="col text-center">
+					<div class="footer_logo"><a href="#">Wish</a></div>
+					<nav class="footer_nav">
+						<ul>
+							<li><a href="index.html">home</a></li>
+							<li><a href="categories.html">clothes</a></li>
+							<li><a href="categories.html">accessories</a></li>
+							<li><a href="categories.html">lingerie</a></li>
+							<li><a href="contact.html">contact</a></li>
+						</ul>
+					</nav>
+					<div class="footer_social">
+						<ul>
+							<li><a href="#"><i class="fa fa-pinterest" aria-hidden="true"></i></a></li>
+							<li><a href="#"><i class="fa fa-linkedin" aria-hidden="true"></i></a></li>
+							<li><a href="#"><i class="fa fa-instagram" aria-hidden="true"></i></a></li>
+							<li><a href="#"><i class="fa fa-reddit-alien" aria-hidden="true"></i></a></li>
+							<li><a href="#"><i class="fa fa-twitter" aria-hidden="true"></i></a></li>
+						</ul>
+					</div>
+				
+				</div>
+			</div>
+		</div>
+	</footer>-->
+</div>
+
+<script src="js/jquery-3.2.1.min.js"></script>
+<script src="styles/bootstrap4/popper.js"></script>
+<script src="styles/bootstrap4/bootstrap.min.js"></script>
+<script src="plugins/easing/easing.js"></script>
+<script src="plugins/parallax-js-master/parallax.min.js"></script>
+<script src="js/product_custom.js"></script>
+</body>
+</html>
